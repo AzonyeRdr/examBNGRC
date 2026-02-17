@@ -232,7 +232,9 @@ class Distribution
 
     private static function recupererBesoins(PDO $db): array
     {
-        $sql = "SELECT * FROM v_bngrc_besoins_avec_articles WHERE categorie != 'argent'";
+        // Inclure désormais tous les besoins, y compris la catégorie 'argent',
+        // pour permettre la simulation et la distribution des dons en argent.
+        $sql = "SELECT * FROM v_bngrc_besoins_avec_articles";
         $stmt = $db->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

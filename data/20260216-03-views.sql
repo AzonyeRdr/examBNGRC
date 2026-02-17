@@ -229,47 +229,49 @@ SELECT
 FROM bngrc_achat a
 JOIN bngrc_besoin b ON a.besoin_id = b.id;
 
--- Vue des dons en argent disponibles (dons argent - distributions validées)
+-- Vue des dons en argent disponibles
+-- Logique: Argent disponible = Total dons argent - Achats validés - Achats en attente (avec frais)
+-- Les achats incluent automatiquement les frais (montant_total = montant_ht + montant_frais)
 CREATE OR REPLACE VIEW v_bngrc_argent_disponible AS
 SELECT 
     COALESCE(SUM(d.quantite * ta.prix_unitaire), 0) AS total_dons_argent,
-    COALESCE((SELECT SUM(montant_total) FROM bngrc_achat WHERE valide = TRUE), 0) AS total_achats_utilises,
-    COALESCE(SUM(d.quantite * ta.prix_unitaire), 0) - COALESCE((SELECT SUM(montant_total) FROM bngrc_achat WHERE valide = TRUE), 0) AS argent_disponible
+    COALESCE((SELECT SUM(montant_total) FROM bngrc_achat), 0) AS total_achats_utilises,
+    GREATEST(0, COALESCE(SUM(d.quantite * ta.prix_unitaire), 0) - COALESCE((SELECT SUM(montant_total) FROM bngrc_achat), 0)) AS argent_disponible
 FROM bngrc_dons d
 JOIN bngrc_type_articles ta ON d.type_article_id = ta.id
 WHERE ta.categorie = 'argent';
 
 -- Vue récapitulative des besoins (totaux, satisfaits, restants) - HORS ARGENT
+-- Logique:
+-- - Montant total = Somme de tous les besoins (quantité × prix unitaire) hors argent
+-- - Montant satisfait = Somme des quantités distribuées + achetées (quantité × prix unitaire du besoin)
+-- - Montant restant = Montant total - Montant satisfait
 CREATE OR REPLACE VIEW v_bngrc_recapitulatif_besoins AS
 SELECT 
+    -- Montant total des besoins (hors argent)
     COALESCE(SUM(CASE WHEN ta.categorie != 'argent' THEN b.quantite * ta.prix_unitaire ELSE 0 END), 0) AS montant_total_besoins,
+    
+    -- Montant satisfait = valeur des distributions validées (dons distribués uniquement)
     COALESCE((
         SELECT SUM(dist.quantite * ta2.prix_unitaire)
         FROM bngrc_distribution dist
         JOIN bngrc_besoin b2 ON dist.besoin_id = b2.id
         JOIN bngrc_type_articles ta2 ON b2.type_article_id = ta2.id
         WHERE dist.est_simulation = FALSE AND ta2.categorie != 'argent'
-    ), 0) + COALESCE((
-        SELECT SUM(a.quantite * ta3.prix_unitaire)
-        FROM bngrc_achat a
-        JOIN bngrc_besoin b3 ON a.besoin_id = b3.id
-        JOIN bngrc_type_articles ta3 ON b3.type_article_id = ta3.id
-        WHERE a.valide = TRUE
     ), 0) AS montant_satisfait,
-    COALESCE(SUM(CASE WHEN ta.categorie != 'argent' THEN b.quantite * ta.prix_unitaire ELSE 0 END), 0) - 
-    COALESCE((
-        SELECT SUM(dist.quantite * ta2.prix_unitaire)
-        FROM bngrc_distribution dist
-        JOIN bngrc_besoin b2 ON dist.besoin_id = b2.id
-        JOIN bngrc_type_articles ta2 ON b2.type_article_id = ta2.id
-        WHERE dist.est_simulation = FALSE AND ta2.categorie != 'argent'
-    ), 0) - COALESCE((
-        SELECT SUM(a.quantite * ta3.prix_unitaire)
-        FROM bngrc_achat a
-        JOIN bngrc_besoin b3 ON a.besoin_id = b3.id
-        JOIN bngrc_type_articles ta3 ON b3.type_article_id = ta3.id
-        WHERE a.valide = TRUE
-    ), 0) AS montant_restant,
+    
+    -- Montant restant = Total - Satisfait (ne peut pas être négatif)
+    GREATEST(0, 
+        COALESCE(SUM(CASE WHEN ta.categorie != 'argent' THEN b.quantite * ta.prix_unitaire ELSE 0 END), 0) - 
+        COALESCE((
+            SELECT SUM(dist.quantite * ta2.prix_unitaire)
+            FROM bngrc_distribution dist
+            JOIN bngrc_besoin b2 ON dist.besoin_id = b2.id
+            JOIN bngrc_type_articles ta2 ON b2.type_article_id = ta2.id
+            WHERE dist.est_simulation = FALSE AND ta2.categorie != 'argent'
+        ), 0)
+    ) AS montant_restant,
+    
     COUNT(CASE WHEN ta.categorie != 'argent' THEN b.id END) AS nombre_besoins,
     
     (SELECT argent_disponible FROM v_bngrc_argent_disponible) AS argent_disponible
