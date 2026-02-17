@@ -25,11 +25,11 @@ input[type="date"],
 input[type="text"] {
     width: 100%;
     padding: 0.9rem 1rem;
-    border: 1px solid rgba(100, 116, 139, 0.3);
+    border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 1rem;
-    background: var(--color-navy-light);
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-text-primary);
     font-family: var(--font-body);
     transition: all 0.3s ease;
 }
@@ -38,14 +38,14 @@ select:focus,
 input:focus {
     outline: none;
     border-color: var(--color-cyan);
-    background: var(--color-navy);
-    box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+    background: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
 }
 
 select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300d9ff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230891b2' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 3rem;
@@ -78,11 +78,11 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* Besoin Info Card */
 .besoin-info {
-    background: linear-gradient(135deg, rgba(0, 217, 255, 0.1) 0%, rgba(183, 255, 0, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.1) 0%, rgba(101, 163, 13, 0.05) 100%);
     padding: var(--space-lg);
     border-radius: 12px;
     margin-bottom: var(--space-lg);
-    border: 1px solid rgba(0, 217, 255, 0.3);
+    border: 2px solid rgba(8, 145, 178, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -119,14 +119,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .info-label {
     font-weight: 600;
-    color: var(--color-slate);
+    color: var(--color-text-secondary);
     font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .info-value {
-    color: var(--color-white);
+    color: var(--color-text-primary);
     font-size: 1.1rem;
     font-weight: 600;
 }

@@ -13,9 +13,9 @@
     color: var(--color-white);
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .recap-card::before {
@@ -25,78 +25,83 @@
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
     animation: rotate 20s linear infinite;
 }
 
 .recap-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .recap-card.blue {
-    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
 }
 
 .recap-card.green {
-    background: linear-gradient(135deg, var(--color-chartreuse) 0%, #9ee600 100%);
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
 }
 
 .recap-card.orange {
-    background: linear-gradient(135deg, var(--color-orange) 0%, #e55d2d 100%);
+    background: linear-gradient(135deg, var(--color-secondary-light) 0%, var(--color-secondary) 100%);
 }
 
 .recap-card.red {
-    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
 }
 
 .recap-card.teal {
-    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-cyan-dark) 100%);
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
 }
 
 .recap-card .value {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 800;
     font-family: var(--font-display);
     margin-bottom: var(--space-xs);
     position: relative;
     z-index: 1;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
 }
 
 .recap-card .label {
-    font-size: 0.95rem;
-    opacity: 0.9;
+    font-size: 1rem;
+    opacity: 0.95;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     position: relative;
     z-index: 1;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Global Ratio Bar */
 .ratio-bar {
     margin-top: var(--space-lg);
     padding: var(--space-lg);
-    background: var(--color-navy);
+    background: var(--color-white);
     border-radius: 12px;
-    border: 1px solid rgba(0, 217, 255, 0.2);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .ratio-bar h3 {
     font-family: var(--font-display);
-    color: var(--color-white);
+    color: var(--color-text-primary);
     margin-bottom: var(--space-md);
     font-size: 1.3rem;
 }
 
 .ratio-bar-container {
     width: 100%;
-    background: rgba(100, 116, 139, 0.2);
+    background: #e2e8f0;
     border-radius: 12px;
     overflow: hidden;
     height: 48px;
     position: relative;
-    border: 1px solid rgba(100, 116, 139, 0.3);
+    border: 1px solid #cbd5e1;
 }
 
 .ratio-bar-fill {
@@ -153,18 +158,19 @@
 }
 
 .detail-card {
-    background: var(--color-navy);
+    background: var(--color-white);
     padding: var(--space-lg);
     border-radius: 12px;
     border-left: 4px solid;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .detail-card:hover {
     transform: translateX(4px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .detail-card.nature {
@@ -180,14 +186,14 @@
 }
 
 .detail-card h4 {
-    color: var(--color-white);
+    color: var(--color-text-primary);
     font-family: var(--font-display);
     margin-bottom: var(--space-sm);
     font-size: 1.1rem;
 }
 
 .detail-card .stats {
-    color: var(--color-slate-light);
+    color: var(--color-text-secondary);
     font-size: 0.9rem;
     line-height: 1.8;
 }

@@ -1,20 +1,38 @@
 /* BNGRC Humanitarian Operations Center - Global Design System */
+/* Local Fonts */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('/fonts/fontawesome-webfont.eot?v=4.7.0');
+    src: url('/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),
+         url('/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),
+         url('/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),
+         url('/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),
+         url('/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Outfit:wght@600;700;800&display=swap');
 
 :root {
-    /* Color Palette - Operations Command */
-    --color-navy-deep: #0a1628;
-    --color-navy: #0f1f38;
-    --color-navy-light: #1a2f4d;
-    --color-cyan: #00d9ff;
-    --color-cyan-dark: #00a8cc;
-    --color-orange: #ff6b35;
-    --color-orange-glow: #ff8c42;
-    --color-chartreuse: #b7ff00;
-    --color-slate: #64748b;
-    --color-slate-light: #94a3b8;
-    --color-white: #ffffff;
-    --color-grid: rgba(0, 217, 255, 0.08);
+    /* Color Palette - Elegant Blue & Gold Theme */
+    --color-primary: #1e40af;        /* Bleu profond */
+    --color-primary-light: #3b82f6; /* Bleu clair */
+    --color-primary-dark: #1e3a8a;  /* Bleu très foncé */
+    --color-secondary: #d4af37;      /* Doré */
+    --color-secondary-light: #f59e0b; /* Or clair */
+    --color-secondary-dark: #b8860b; /* Or foncé */
+    --color-dark: #1f2937;           /* Gris foncé */
+    --color-dark-light: #374151;     /* Gris moyen */
+    --color-white: #ffffff;          /* Blanc */
+    --color-gray-50: #f9fafb;        /* Gris très clair */
+    --color-gray-100: #f3f4f6;       /* Gris clair */
+    --color-gray-600: #4b5563;       /* Gris texte */
+    --color-bg-main: #f9fafb;        /* Fond principal */
+    --color-bg-card: #ffffff;        /* Fond des cards */
+    --color-text-primary: #1f2937;   /* Texte principal */
+    --color-text-secondary: #6b7280; /* Texte secondaire */
+    --color-grid: rgba(30, 64, 175, 0.03);
     
     /* Spacing System */
     --space-xs: 0.5rem;
@@ -43,8 +61,8 @@
 
 body {
     font-family: var(--font-body);
-    background: var(--color-navy-deep);
-    color: var(--color-slate-light);
+    background: var(--color-bg-main);
+    color: var(--color-text-primary);
     line-height: 1.6;
     min-height: 100vh;
     position: relative;
@@ -75,10 +93,10 @@ body::before {
 
 /* Navigation Bar - Command Center Style */
 .navbar {
-    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     padding: 0;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 1px var(--color-cyan);
-    border-bottom: 2px solid var(--color-cyan);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid var(--color-secondary);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -94,7 +112,7 @@ body::before {
     height: 2px;
     background: linear-gradient(90deg, 
         transparent 0%, 
-        var(--color-cyan) 50%, 
+        var(--color-secondary) 50%, 
         transparent 100%);
     animation: scanLine 3s ease-in-out infinite;
 }
@@ -136,7 +154,7 @@ body::before {
     top: 50%;
     width: 3px;
     height: 0;
-    background: var(--color-cyan);
+    background: var(--color-secondary);
     transition: height 0.3s ease;
     transform: translateY(-50%);
 }
@@ -146,8 +164,8 @@ body::before {
 }
 
 .navbar-brand span {
-    color: var(--color-cyan);
-    text-shadow: 0 0 10px var(--color-cyan);
+    color: var(--color-secondary);
+    text-shadow: 0 0 10px var(--color-secondary);
     animation: brandGlow 2s ease-in-out infinite;
 }
 
@@ -163,7 +181,7 @@ body::before {
 }
 
 .nav-links a {
-    color: var(--color-slate-light);
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     padding: 1.3rem 1.25rem;
     display: flex;
@@ -184,15 +202,15 @@ body::before {
     bottom: 0;
     left: 50%;
     width: 0;
-    height: 2px;
-    background: var(--color-cyan);
+    height: 3px;
+    background: var(--color-white);
     transition: all 0.3s ease;
     transform: translateX(-50%);
 }
 
 .nav-links a:hover {
-    color: var(--color-cyan);
-    background: rgba(0, 217, 255, 0.1);
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .nav-links a:hover::before {
@@ -201,8 +219,8 @@ body::before {
 
 .nav-links a.active {
     color: var(--color-white);
-    background: rgba(0, 217, 255, 0.15);
-    box-shadow: inset 0 -2px 0 var(--color-cyan);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 -3px 0 var(--color-white);
 }
 
 .main-content {
