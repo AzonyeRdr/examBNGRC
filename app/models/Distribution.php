@@ -280,18 +280,45 @@ class Distribution
 
                 $qDispo = (int)$don['quantite_disponible'];
                 $affectations = [];
+                $decimales = [];
 
                 $totalRestantCourant = array_sum($besoinsRestants);
                 if ($totalRestantCourant <= 0 || $qDispo <= 0) {
                     continue;
                 }
 
+                // Calcul de la distribution proportionnelle avec floor et stockage des décimales
                 foreach ($besoinsRestants as $besoinId => $qBesoin) {
-                    $qAffecte = (int)floor($qDispo * ($qBesoin / $totalRestantCourant));
+                    $proportionExacte = $qDispo * ($qBesoin / $totalRestantCourant);
+                    $qAffecte = (int)floor($proportionExacte);
                     $qAffecte = min($qAffecte, $besoinsRestants[$besoinId]);
+                    
                     $affectations[$besoinId] = $qAffecte;
+                    $decimales[$besoinId] = $proportionExacte - $qAffecte; // Stocker la partie décimale
                 }
 
+                // Calculer le reste après distribution initiale
+                $totalDistribue = array_sum($affectations);
+                $reste = $qDispo - $totalDistribue;
+
+                // Redistribuer le reste aux besoins avec les plus grandes décimales
+                if ($reste > 0) {
+                    // Trier par décimale décroissante
+                    arsort($decimales);
+                    
+                    foreach ($decimales as $besoinId => $decimal) {
+                        if ($reste <= 0) break;
+                        
+                        // Vérifier que le besoin peut encore recevoir
+                        if ($affectations[$besoinId] < $besoinsRestants[$besoinId]) {
+                            $ajouter = min($reste, $besoinsRestants[$besoinId] - $affectations[$besoinId]);
+                            $affectations[$besoinId] += $ajouter;
+                            $reste -= $ajouter;
+                        }
+                    }
+                }
+
+                // Créer les distributions
                 foreach ($affectations as $besoinId => $qAffecte) {
                     if ($qAffecte <= 0) continue;
 
