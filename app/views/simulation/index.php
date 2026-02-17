@@ -116,7 +116,7 @@
     <?php if (empty($dons)): ?>
         <div class="empty-state">
             <p>Aucun don disponible à distribuer.</p>
-            <a href="<?php echo $baseurl; ?>/dons/ajout" class="btn btn-success">➕ Ajouter un don</a>
+            <a href="<?php echo $baseurl; ?>/dons/new" class="btn btn-success">➕ Ajouter un don</a>
         </div>
     <?php else: ?>
         <table>

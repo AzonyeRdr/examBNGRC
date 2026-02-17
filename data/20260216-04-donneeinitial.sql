@@ -8,6 +8,8 @@
 -- ============================================================
 -- CRÉATION DES TABLES INITIALES
 -- ============================================================
+DROP TABLE bngrc_besoin_initial;
+DROP TABLE bngrc_dons_initial;
 
 -- Table de sauvegarde des besoins initiaux
 CREATE TABLE IF NOT EXISTS bngrc_besoin_initial (

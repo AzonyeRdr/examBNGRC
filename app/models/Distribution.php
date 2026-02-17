@@ -278,26 +278,18 @@ class Distribution
 
             foreach ($dons as $don) {
 
-                $qDispo = $don['quantite_disponible'];
-                $resteARepartir = $qDispo;
+                $qDispo = (int)$don['quantite_disponible'];
                 $affectations = [];
 
-                foreach ($besoinsRestants as $besoinId => $qBesoin) {
-                    $qAffecte = floor($qDispo * ($qBesoin / $totalRestant));
-                    $qAffecte = min($qAffecte, $besoinsRestants[$besoinId]);
-                    $affectations[$besoinId] = $qAffecte;
-                    $resteARepartir -= $qAffecte;
+                $totalRestantCourant = array_sum($besoinsRestants);
+                if ($totalRestantCourant <= 0 || $qDispo <= 0) {
+                    continue;
                 }
 
-                if ($resteARepartir > 0) {
-                    arsort($besoinsRestants);
-                    foreach (array_keys($besoinsRestants) as $besoinId) {
-                        if ($resteARepartir <= 0) break;
-                        if ($affectations[$besoinId] < $besoinsRestants[$besoinId]) {
-                            $affectations[$besoinId]++;
-                            $resteARepartir--;
-                        }
-                    }
+                foreach ($besoinsRestants as $besoinId => $qBesoin) {
+                    $qAffecte = (int)floor($qDispo * ($qBesoin / $totalRestantCourant));
+                    $qAffecte = min($qAffecte, $besoinsRestants[$besoinId]);
+                    $affectations[$besoinId] = $qAffecte;
                 }
 
                 foreach ($affectations as $besoinId => $qAffecte) {
