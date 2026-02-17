@@ -104,7 +104,3 @@ select[name="distribution_logic"] {
 select[name="distribution_logic"]:focus {
     box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2);
 }
-
-.logic-row {
-    justify-content: center;
-}

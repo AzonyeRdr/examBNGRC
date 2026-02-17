@@ -40,14 +40,14 @@ INSERT INTO bngrc_ville (nom, idregion, nbsinistres) VALUES
 -- Types d'articles
 -- categorie = 'nature' | 'argent' | 'material'
 -- --------------------------------------------------
-INSERT INTO bngrc_type_articles (nom, categorie, prix_unitaire, unite) VALUES
-('Eau potable (litre)', 'nature', 0.50, 'litre'),
-('Riz (sac 50kg)', 'nature', 35000.00, 'sac'),
-('Tentes', 'material', 120000.00, 'unité'),
-('Couvertures', 'material', 8000.00, 'pièce'),
-('Kits hygiène', 'material', 15000.00, 'kit'),
-('Aide financière (espèces)', 'argent', 1.00, 'Ar'),
-('Matériel médical', 'material', 25000.00, 'lot');
+-- INSERT INTO bngrc_type_articles (nom, categorie, prix_unitaire, unite) VALUES
+-- ('Eau potable (litre)', 'nature', 0.50, 'litre'),
+-- ('Riz (sac 50kg)', 'nature', 35000.00, 'sac'),
+-- ('Tentes', 'material', 120000.00, 'unité'),
+-- ('Couvertures', 'material', 8000.00, 'pièce'),
+-- ('Kits hygiène', 'material', 15000.00, 'kit'),
+-- ('Aide financière (espèces)', 'argent', 1.00, 'Ar'),
+-- ('Matériel médical', 'material', 25000.00, 'lot');
 
 INSERT INTO bngrc_configuration (nom, valeur) VALUES ('FRAIS_ACHAT_PERCENT', '10')
 ON DUPLICATE KEY UPDATE valeur = VALUES(valeur);

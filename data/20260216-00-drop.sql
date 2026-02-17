@@ -33,6 +33,9 @@ DROP TABLE IF EXISTS bngrc_type_articles;
 DROP TABLE IF EXISTS bngrc_ville;
 DROP TABLE IF EXISTS bngrc_region;
 DROP TABLE IF EXISTS bngrc_configuration;
+DROP TABLE IF EXISTS  bngrc_besoin_initial;
+DROP TABLE IF EXISTS bngrc_dons_initial;
+
 
 -- Réactive les vérifications de clés étrangères
 SET FOREIGN_KEY_CHECKS = 1;
