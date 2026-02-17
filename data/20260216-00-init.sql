@@ -1,0 +1,6 @@
+DROP DATABASE bngrc;
+
+CREATE DATABASE bngrc;
+
+
+USE bngrc;
