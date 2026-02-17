@@ -1,4 +1,42 @@
-/* CSS for donations list page */
+/* DONS PAGE - Donation Tracking */
 th {
-    background-color: #28a745;
+    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-cyan-dark) 100%);
+    color: var(--color-white);
+}
+
+/* Stats Summary */
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.stat-box {
+    background: var(--color-navy-light);
+    padding: var(--space-md);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-cyan);
+    box-shadow: 0 8px 24px rgba(0, 217, 255, 0.2);
+}
+
+.stat-box .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: var(--color-cyan);
+}
+
+.stat-box .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-slate-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: var(--space-xs);
 }

@@ -29,3 +29,11 @@ ville 2: 3 * (6/9) = 2 => on rpend le 2
 ville 3: 5 * (6/9) = 3.33 => on prend le 3
 
 Il se peut qu on ait 0
+
+
+
+Creer la fonction resetToInitialData avec transation :
+- delete bngrc_distribution,  bngrc_historique_besoin, bngrc_achat, bngrc_dons, bngrc_besoin
+- recharger les donnees de besoins et de dons avec INSERT INTO bngrc_dons ou bngrc_besoin SELECT FROM bngrc_dons_initial ou bngrc_besoins_initial
+- Inserer dans bngrc_historique_besoin 
+- reinitialister les auto increments de bngrc_besoin, bngrc_dons, 

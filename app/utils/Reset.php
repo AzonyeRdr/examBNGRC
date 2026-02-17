@@ -10,26 +10,19 @@ use PDOException;
  */
 class Reset
 {
-    /**
-     * Réinitialiser les données du système aux valeurs initiales
-     * 
-     * @param PDO $db Connexion à la base de données
-     * @return array ['success' => bool, 'message' => string]
-     */
+   
     public static function resetToInitialData(PDO $db): array
     {
         try {
             // Démarrer une transaction
             $db->beginTransaction();
 
-            // 1️⃣ Supprimer toutes les données actuelles (dans le bon ordre)
             $db->exec("DELETE FROM bngrc_distribution");
             $db->exec("DELETE FROM bngrc_historique_besoin");
             $db->exec("DELETE FROM bngrc_achat");
             $db->exec("DELETE FROM bngrc_dons");
             $db->exec("DELETE FROM bngrc_besoin");
 
-            // 3️⃣ Recharger les données initiales depuis les tables de sauvegarde
             $db->exec("INSERT INTO bngrc_besoin (id, ville_id, type_article_id, quantite, date_demande) 
                        SELECT id, ville_id, type_article_id, quantite, date_demande 
                        FROM bngrc_besoin_initial");
@@ -38,7 +31,6 @@ class Reset
                        SELECT id, type_article_id, quantite, date_don, donateur, statut 
                        FROM bngrc_dons_initial");
 
-            // 4️⃣ Enregistrer l'historique des besoins initiaux
             $db->exec("INSERT INTO bngrc_historique_besoin (besoin_id, quantite, date_enregistrement) 
                        SELECT id, quantite, date_demande 
                        FROM bngrc_besoin");
@@ -48,7 +40,6 @@ class Reset
                 $db->commit();
             }
 
-            // 4️⃣ Réinitialiser les AUTO_INCREMENT (hors transaction car ALTER TABLE force un commit)
             $db->exec("ALTER TABLE bngrc_besoin AUTO_INCREMENT = 1");
             $db->exec("ALTER TABLE bngrc_dons AUTO_INCREMENT = 1");
             $db->exec("ALTER TABLE bngrc_distribution AUTO_INCREMENT = 1");

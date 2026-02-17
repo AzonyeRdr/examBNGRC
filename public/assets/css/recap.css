@@ -1,103 +1,196 @@
-/* CSS for recap page */
+/* RECAP PAGE - Mission Overview Dashboard */
+
 .recap-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
 }
 
 .recap-card {
-    padding: 25px;
+    padding: var(--space-lg);
     border-radius: 12px;
-    color: white;
+    color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+}
+
+.recap-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+.recap-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
 }
 
 .recap-card.blue {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
 }
 
 .recap-card.green {
-    background: linear-gradient(135deg, #11998e, #38ef7d);
+    background: linear-gradient(135deg, var(--color-chartreuse) 0%, #9ee600 100%);
 }
 
 .recap-card.orange {
-    background: linear-gradient(135deg, #f2994a, #f2c94c);
+    background: linear-gradient(135deg, var(--color-orange) 0%, #e55d2d 100%);
 }
 
 .recap-card.red {
-    background: linear-gradient(135deg, #eb3349, #f45c43);
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
 }
 
 .recap-card.teal {
-    background: linear-gradient(135deg, #00b4db, #0083b0);
+    background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-cyan-dark) 100%);
 }
 
 .recap-card .value {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    margin-bottom: var(--space-xs);
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .recap-card .label {
-    font-size: 14px;
+    font-size: 0.95rem;
     opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Global Ratio Bar */
 .ratio-bar {
-    margin-top: 30px;
+    margin-top: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--color-navy);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 217, 255, 0.2);
+}
+
+.ratio-bar h3 {
+    font-family: var(--font-display);
+    color: var(--color-white);
+    margin-bottom: var(--space-md);
+    font-size: 1.3rem;
 }
 
 .ratio-bar-container {
     width: 100%;
-    background-color: #e9ecef;
-    border-radius: 10px;
+    background: rgba(100, 116, 139, 0.2);
+    border-radius: 12px;
     overflow: hidden;
-    height: 40px;
+    height: 48px;
     position: relative;
+    border: 1px solid rgba(100, 116, 139, 0.3);
 }
 
 .ratio-bar-fill {
     height: 100%;
-    border-radius: 10px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    transition: width 0.5s ease;
+    color: var(--color-white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.ratio-bar-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
 }
 
 .ratio-low {
-    background: linear-gradient(90deg, #eb3349, #f45c43);
+    background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+    box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.5);
 }
 
 .ratio-partial {
-    background: linear-gradient(90deg, #f2994a, #f2c94c);
+    background: linear-gradient(90deg, var(--color-orange) 0%, #e55d2d 100%);
+    box-shadow: inset 0 0 20px rgba(255, 107, 53, 0.5);
+}
+
+.ratio-high {
+    background: linear-gradient(90deg, var(--color-cyan) 0%, var(--color-cyan-dark) 100%);
+    box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.5);
 }
 
 .ratio-complete {
-    background: linear-gradient(90deg, #11998e, #38ef7d);
+    background: linear-gradient(90deg, var(--color-chartreuse) 0%, #9ee600 100%);
+    box-shadow: inset 0 0 20px rgba(183, 255, 0, 0.5);
 }
 
+/* Detail Cards */
 .detail-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
 }
 
 .detail-card {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
+    background: var(--color-navy);
+    padding: var(--space-lg);
+    border-radius: 12px;
     border-left: 4px solid;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.detail-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
 }
 
 .detail-card.nature {
-    border-color: #28a745;
+    border-color: var(--color-chartreuse);
 }
 
 .detail-card.material {
+    border-color: var(--color-slate);
+}
+
+.detail-card.argent {
+    border-color: #fbbf24;
+}
+
+.detail-card h4 {
+    color: var(--color-white);
+    font-family: var(--font-display);
+    margin-bottom: var(--space-sm);
+    font-size: 1.1rem;
+}
+
+.detail-card .stats {
+    color: var(--color-slate-light);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
     border-color: #6c757d;
 }
 

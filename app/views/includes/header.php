@@ -8,6 +8,7 @@
     <?php $baseurl = rtrim(Flight::get('flight.base_url'), '/'); ?>
     <link rel="stylesheet" href="<?php echo $baseurl; ?>/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo $baseurl; ?>/assets/css/common.css">
+    <link rel="stylesheet" href="<?php echo $baseurl; ?>/assets/css/animations.css">
     <script>
         window.BASE_URL = '<?php echo $baseurl; ?>/';
     </script>
@@ -17,7 +18,7 @@
     <?php $baseurl = rtrim(Flight::get('flight.base_url'), '/'); ?>
     <nav class="navbar">
         <div class="navbar-inner">
-            <a href="<?php echo $baseurl; ?>/" class="navbar-brand">🏛️ <span>BNGRC</span> - Gestion des Dons</a>
+            <a href="<?php echo $baseurl; ?>/" class="navbar-brand">🏛️ <span>BNGRC</span></a>
             <ul class="nav-links">
                 <li><a href="<?php echo $baseurl; ?>/" <?php echo ($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/index') ? 'class="active"' : ''; ?>>🏠 Accueil</a></li>
                 <li><a href="<?php echo $baseurl; ?>/besoins" <?php echo strpos($_SERVER['REQUEST_URI'], '/besoins') === 0 ? 'class="active"' : ''; ?>>📋 Besoins</a></li>
